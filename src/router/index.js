@@ -8,12 +8,16 @@ import AppLayout from "../components/AppLayout.vue";
 
 const routes = [
     {
+        path: '/',
+        redirect: '/app'
+    },
+    {
         path: '/app',
         name: 'app',
         redirect: 'app/dashboard',
         component: AppLayout,
         meta: {
-            requestAuth: true
+            requiresAuth: true
         },
         children: [
             {
@@ -31,17 +35,26 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: Login
+        component: Login,
+        meta: {
+            requiresGuest: true
+        }
     },
     {
         path: '/request-password',
         name: 'requestPassword',
         component: RequestPassword,
+        meta: {
+            requiresGuest: true
+        }
     },
     {
         path: '/reset-password/:token',
         name: 'resetPassword',
         component: ResetPassword,
+        meta: {
+            requiresGuest: true
+        }
     },
 ]
 
@@ -51,10 +64,10 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if(to.meta.requestAuth && !store.state.user.token){
+    if(to.meta.requiresAuth && !store.state.user.token){
         next({name: 'login'})
     }
-    else if (to.meta.requestGuest && store.state.user.token) {
+    else if (to.meta.requiresGuest && store.state.user.token) {
         next({name: 'app.dashboard'})
     } else {
         next()
