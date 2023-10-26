@@ -22,12 +22,25 @@
 <script setup>
 import Sidebar from "./Sidebar.vue";
 import Navbar from "./Navbar.vue";
-import {ref, toRef} from "vue";
+import {computed, onMounted, ref, toRef} from "vue";
+import store from "../store";
 
 const sidebarOpened = ref(true)
+const currentUser = computed(() => store.state.user.data)
+
 function toggleSidebar() {
   sidebarOpened.value = !sidebarOpened.value
 }
+function updateSidebarState() {
+  sidebarOpened.value = window.outerWidth > 768
+}
+
+onMounted(() => {
+  store.dispatch('getUser')
+  updateSidebarState()
+  window.addEventListener('resize', updateSidebarState)
+})
+
 
 </script>
 

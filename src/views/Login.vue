@@ -96,7 +96,8 @@
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
             </span>
             Sign in
-          </button>        </div>
+          </button>
+        </div>
       </form>
     </guest-layout>
 
@@ -124,10 +125,9 @@ function login(ev) {
   .then(() => {
     loading.value = false;
     router.push({name: 'app.dashboard'})
-  }).catch((err) => {
-    console.log(err)
+  }).catch(({res}) => {
     loading.value = false;
-    errorMsg.value = err
+    errorMsg.value = res.data.message
   })
 }
 </script>
