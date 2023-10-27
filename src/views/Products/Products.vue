@@ -8,7 +8,7 @@
       Add new Product
     </button>
   </div>
-  <ProductsTable/>
+  <ProductsTable @clickEdit="editProduct"/>
   <ProductsModal v-model="showModal" :product="productModel" @close="onModalClose"/>
 </template>
 
@@ -18,18 +18,32 @@ import store from "../../store";
 import ProductsTable from "./ProductsTable.vue";
 import ProductsModal from "./ProductsModal.vue";
 
-const products = computed(() => store.state.products)
-const showModal = ref(false)
-const productModel = ref({
+const EMPTY_OBJECT = {
   id: '',
   title: '',
   image: '',
   description: '',
   price: '',
-})
+}
+const products = computed(() => store.state.products)
+const showModal = ref(false)
+const productModel = ref({...EMPTY_OBJECT})
 
 function showAddNewModal(){
   showModal.value = true
+}
+
+function editProduct(product) {
+  store.dispatch('getProduct', product.id)
+  .then(({data}) => {
+    productModel.value = data
+    // this is for edit product ...bad name
+    showAddNewModal()
+  })
+}
+
+function onModalClose() {
+  productModel.value = {...EMPTY_OBJECT}
 }
 
 </script>

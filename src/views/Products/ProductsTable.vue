@@ -60,7 +60,7 @@
       <tr v-for="(product, index) of products.data">
         <td class="border-b p-2 ">{{ product.id }}</td>
         <td class="border-b p-2 ">
-          <img class="w-16 h-16 object-cover" :src="product.image" :alt="product.title">
+          <img class="w-16 h-16 object-cover" :src="product.image_url" :alt="product.title">
         </td>
         <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
           {{ product.title }}
@@ -226,6 +226,10 @@ function sortProducts(field) {
   getProducts()
 }
 
+function editProduct(product) {
+  emit('clickEdit', product)
+}
+
 function deleteProduct(product) {
   if(!confirm("Are you sure you want to delete this?")){
     return
@@ -235,7 +239,6 @@ function deleteProduct(product) {
       store.dispatch('getProducts')
   })
 }
-
 
 </script>
 
