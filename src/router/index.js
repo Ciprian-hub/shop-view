@@ -6,6 +6,7 @@ import ResetPassword from "../views/ResetPassword.vue";
 import store from "../store/index.js";
 import AppLayout from "../components/AppLayout.vue";
 import Products from '../views/Products/Products.vue'
+import Orders from "../views/Orders/Orders.vue";
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
                 path: 'products',
                 name: 'app.product',
                 component: Products
+            },
+            {
+                path: 'orders',
+                name: 'app.orders',
+                component: Orders
             }
         ]
     },

@@ -7,7 +7,7 @@
     <div class="flex-1 h-full">
       <Navbar @toggle-sidebar="toggleSidebar"></Navbar>
       <!--      Content-->
-      <main class="p-6">
+      <main class="p-6 min-h-[100vh]">
         <router-view></router-view>
       </main>
       <!--      Content-->
