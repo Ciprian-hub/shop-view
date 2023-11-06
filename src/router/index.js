@@ -8,6 +8,7 @@ import store from "../store/index.js";
 import AppLayout from "../components/AppLayout.vue";
 import Products from '../views/Products/Products.vue'
 import Orders from "../views/Orders/Orders.vue";
+import Users from "../views/Users/Users.vue";
 
 const routes = [
     {
@@ -42,7 +43,12 @@ const routes = [
                 path: 'orders/:id',
                 name: 'app.order.view',
                 component: OrderView
-            }
+            },
+            {
+                path: 'users',
+                name: 'app.users',
+                component: Users
+            },
         ]
     },
     {
@@ -82,7 +88,8 @@ router.beforeEach((to, from, next) => {
     }
     else if (to.meta.requiresGuest && store.state.user.token) {
         next({name: 'app.dashboard'})
-    } else {
+    }
+    else {
         next()
     }
 })
