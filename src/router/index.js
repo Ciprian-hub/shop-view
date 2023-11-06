@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
-import Dashboard from "../views/Dashboard.vue";
+import OrderView from '../views/Orders/OrderView.vue'
 import Login from "../views/Login.vue";
+import Dashboard from "../views/Dashboard.vue";
 import RequestPassword from "../views/RequestPassword.vue";
 import ResetPassword from "../views/ResetPassword.vue";
 import store from "../store/index.js";
@@ -36,6 +37,11 @@ const routes = [
                 path: 'orders',
                 name: 'app.orders',
                 component: Orders
+            },
+            {
+                path: 'orders/:id',
+                name: 'app.order.view',
+                component: OrderView
             }
         ]
     },

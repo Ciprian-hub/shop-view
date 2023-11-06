@@ -11,7 +11,7 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <span class="ml-3">Found {{orders.total}} orders</span>
+        <span class="ml-3">Found {{ orders.total }} orders</span>
       </div>
       <div>
         <input v-model="search" @change="getOrders(null)"
@@ -46,21 +46,21 @@
         </TableHeaderCell>
       </tr>
       </thead>
-<!--      <tbody v-if="orders.loading || !orders.data.length">-->
-<!--      <tr>-->
-<!--        <td colspan="6">-->
-<!--          <Spinner v-if="orders.loading"/>-->
-<!--          <p v-else class="text-center py-8 text-gray-700">-->
-<!--            There are no orders-->
-<!--          </p>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
+      <!--      <tbody v-if="orders.loading || !orders.data.length">-->
+      <!--      <tr>-->
+      <!--        <td colspan="6">-->
+      <!--          <Spinner v-if="orders.loading"/>-->
+      <!--          <p v-else class="text-center py-8 text-gray-700">-->
+      <!--            There are no orders-->
+      <!--          </p>-->
+      <!--        </td>-->
+      <!--      </tr>-->
+      <!--      </tbody>-->
       <tbody>
       <tr v-for="(order, index) of orders.data">
         <td class="border-b p-2 ">{{ order.id }}</td>
         <td class="border-b p-2 ">
-          <span>{{order.status}}</span>
+          <span>{{ order.status }}</span>
         </td>
         <td class="border-b p-2 max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis">
           {{ order.created_at }}
@@ -68,72 +68,14 @@
         <td class="border-b p-2">
           {{ order.total_price }}
         </td>
-<!--        <td class="border-b p-2">-->
-<!--          {{ $filters.currencyUSD(order.price) }}-->
-<!--        </td>-->
+        <!--        <td class="border-b p-2">-->
+        <!--          {{ $filters.currencyUSD(order.price) }}-->
+        <!--        </td>-->
         <td class="border-b p-2 ">
           {{ order.customer.email }}
         </td>
         <td class="border-b p-2 ">
-          <Menu as="div" class="relative inline-block text-left">
-            <div>
-              <MenuButton
-                  class="inline-flex items-center justify-center w-full justify-center rounded-full w-10 h-10 bg-black bg-opacity-0 text-sm font-medium text-white hover:bg-opacity-5 focus:bg-opacity-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              >
-                <DotsVerticalIcon
-                    class="h-5 w-5 text-indigo-500"
-                    aria-hidden="true"/>
-              </MenuButton>
-            </div>
-
-<!--            <transition-->
-<!--                enter-active-class="transition duration-100 ease-out"-->
-<!--                enter-from-class="transform scale-95 opacity-0"-->
-<!--                enter-to-class="transform scale-100 opacity-100"-->
-<!--                leave-active-class="transition duration-75 ease-in"-->
-<!--                leave-from-class="transform scale-100 opacity-100"-->
-<!--                leave-to-class="transform scale-95 opacity-0"-->
-<!--            >-->
-              <MenuItems
-                  class="absolute z-10 right-0 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <div class="px-1 py-1">
-                  <MenuItem v-slot="{ active }">
-                    <button
-                        :class="[
-                        active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                        @click="editProduct(order)"
-                    >
-                      <PencilIcon
-                          :active="active"
-                          class="mr-2 h-5 w-5 text-indigo-400"
-                          aria-hidden="true"
-                      />
-                      Edit
-                    </button>
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <button
-                        :class="[
-                        active ? 'bg-indigo-600 text-white' : 'text-gray-900',
-                        'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                      ]"
-                        @click="deleteProduct(order)"
-                    >
-                      <TrashIcon
-                          :active="active"
-                          class="mr-2 h-5 w-5 text-indigo-400"
-                          aria-hidden="true"
-                      />
-                      Delete
-                    </button>
-                  </MenuItem>
-                </div>
-              </MenuItems>
-<!--            </transition>-->
-          </Menu>
+          <router-link :to="{name: 'app.order.view', params: {id: order.id}}">View</router-link>
         </td>
       </tr>
       </tbody>
@@ -195,7 +137,7 @@ onMounted(() => {
 
 function getForPage(ev, link) {
   ev.preventDefault()
-  if(!link.url || link.active){
+  if (!link.url || link.active) {
     return
   }
   getOrders(link.url)
@@ -222,12 +164,7 @@ function sortOrders(field) {
     sortField.value = field;
     sortDirection.value = 'asc'
   }
-
   getOrders()
-}
-
-function editProduct(order) {
-  emit('clickEdit', order)
 }
 
 </script>

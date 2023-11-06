@@ -84,7 +84,9 @@ export function updateProduct({commit}, product) {
 export function getProduct({commit}, id) {
     return axiosClient.get(`/products/${id}`)
 }
-
+export function getOrder({commit}, id) {
+    return axiosClient.get(`/orders/${id}`)
+}
 export function deleteProduct({commit}, id) {
     return axiosClient.delete(`/products/${id}`)
 }
