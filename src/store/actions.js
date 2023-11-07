@@ -68,6 +68,10 @@ export function createUser({commit}, user) {
     return axiosClient.post('/users', user)
 }
 
+export function createCustomer({commit}, customer) {
+    return axiosClient.post('/customers', customer)
+}
+
 export function updateProduct({commit}, product) {
     const id = product.id
     if(product.image instanceof File) {
@@ -89,8 +93,16 @@ export function updateUser({commit}, user) {
     return axiosClient.put(`/users/${user.id}`, user)
 }
 
+export function updateCustomer({commit}, customer) {
+    return axiosClient.put(`/customers/${customer.id}`, customer)
+}
+
 export function getProduct({commit}, id) {
     return axiosClient.get(`/products/${id}`)
+}
+
+export function geCustomer({commit}, id) {
+    return axiosClient.get(`/customers/${id}`)
 }
 
 export function getUser({commit}, id) {
@@ -140,5 +152,24 @@ export function getUsers({commit}, {url = null, search = '', perPage = 10, sort_
         })
         .catch(() => {
             commit('setUsers', [false])
+        })
+}
+
+export function getCustomers({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction} = {}) {
+    commit('setCustomers', [true])
+    url = url || '/customers';
+    return axiosClient.get(url, {
+        params: {
+            search,
+            per_page: perPage,
+            sort_field,
+            sort_direction
+        }
+    })
+        .then((res)=> {
+            commit('setCustomers', [false, res.data])
+        })
+        .catch(() => {
+            commit('setCustomers', [false])
         })
 }
