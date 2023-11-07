@@ -11,7 +11,7 @@
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <span class="ml-3">Found {{customers.total}} customers</span>
+        <span class="ml-3">Found {{ customers.total }} customers</span>
       </div>
       <div>
         <input v-model="search" @change="getCustomers(null)"
@@ -43,16 +43,16 @@
         </TableHeaderCell>
       </tr>
       </thead>
-<!--      <tbody v-if="customers.loading || !customers.data.length">-->
-<!--      <tr>-->
-<!--        <td colspan="6">-->
-<!--          <Spinner v-if="customers.loading"/>-->
-<!--          <p v-else class="text-center py-8 text-gray-700">-->
-<!--            There are no customers-->
-<!--          </p>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
+      <!--      <tbody v-if="customers.loading || !customers.data.length">-->
+      <!--      <tr>-->
+      <!--        <td colspan="6">-->
+      <!--          <Spinner v-if="customers.loading"/>-->
+      <!--          <p v-else class="text-center py-8 text-gray-700">-->
+      <!--            There are no customers-->
+      <!--          </p>-->
+      <!--        </td>-->
+      <!--      </tr>-->
+      <!--      </tbody>-->
       <tbody>
       <tr v-for="(customer, index) of customers.data">
         <td class="border-b p-2 ">
@@ -79,53 +79,53 @@
               </MenuButton>
             </div>
 
-<!--            <transition-->
-<!--                enter-active-class="transition duration-100 ease-out"-->
-<!--                enter-from-class="transform scale-95 opacity-0"-->
-<!--                enter-to-class="transform scale-100 opacity-100"-->
-<!--                leave-active-class="transition duration-75 ease-in"-->
-<!--                leave-from-class="transform scale-100 opacity-100"-->
-<!--                leave-to-class="transform scale-95 opacity-0"-->
-<!--            >-->
-              <MenuItems
-                  class="absolute z-10 right-0 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <div class="px-1 py-1">
-                  <MenuItem v-slot="{ active }">
-                    <button
-                        :class="[
+            <!--            <transition-->
+            <!--                enter-active-class="transition duration-100 ease-out"-->
+            <!--                enter-from-class="transform scale-95 opacity-0"-->
+            <!--                enter-to-class="transform scale-100 opacity-100"-->
+            <!--                leave-active-class="transition duration-75 ease-in"-->
+            <!--                leave-from-class="transform scale-100 opacity-100"-->
+            <!--                leave-to-class="transform scale-95 opacity-0"-->
+            <!--            >-->
+            <MenuItems
+                class="absolute z-10 right-0 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            >
+              <div class="px-1 py-1">
+                <MenuItem v-slot="{ active }">
+                  <button
+                      :class="[
                         active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
-                        @click="editCustomer(customer)"
-                    >
-                      <PencilIcon
-                          :active="active"
-                          class="mr-2 h-5 w-5 text-indigo-400"
-                          aria-hidden="true"
-                      />
-                      Edit
-                    </button>
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <button
-                        :class="[
+                      @click="editCustomer(customer)"
+                  >
+                    <PencilIcon
+                        :active="active"
+                        class="mr-2 h-5 w-5 text-indigo-400"
+                        aria-hidden="true"
+                    />
+                    Edit
+                  </button>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <button
+                      :class="[
                         active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
-                        @click="deleteCustomer(customer)"
-                    >
-                      <TrashIcon
-                          :active="active"
-                          class="mr-2 h-5 w-5 text-indigo-400"
-                          aria-hidden="true"
-                      />
-                      Delete
-                    </button>
-                  </MenuItem>
-                </div>
-              </MenuItems>
-<!--            </transition>-->
+                      @click="deleteCustomer(customer)"
+                  >
+                    <TrashIcon
+                        :active="active"
+                        class="mr-2 h-5 w-5 text-indigo-400"
+                        aria-hidden="true"
+                    />
+                    Delete
+                  </button>
+                </MenuItem>
+              </div>
+            </MenuItems>
+            <!--            </transition>-->
           </Menu>
         </td>
       </tr>
@@ -188,7 +188,7 @@ onMounted(() => {
 
 function getForPage(ev, link) {
   ev.preventDefault()
-  if(!link.url || link.active){
+  if (!link.url || link.active) {
     return
   }
   getCustomers(link.url)
@@ -224,13 +224,13 @@ function editCustomer(customer) {
 }
 
 function deleteCustomer(customer) {
-  if(!confirm("Are you sure you want to delete this?")){
+  if (!confirm("Are you sure you want to delete this?")) {
     return
   }
   store.dispatch('deleteCustomer', customer.id)
-  .then(res =>{
-      store.dispatch('getCustomers')
-  })
+      .then(res => {
+        store.dispatch('getCustomers')
+      })
 }
 
 </script>
