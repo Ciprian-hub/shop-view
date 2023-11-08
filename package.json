@@ -11,7 +11,9 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
     "axios": "^1.5.1",
+    "chart.js": "^4.4.0",
     "vue": "^3.3.4",
+    "vue-chartjs": "^5.2.0",
     "vue-router": "^4.0.13",
     "vuex": "^4.0.2"
   },
