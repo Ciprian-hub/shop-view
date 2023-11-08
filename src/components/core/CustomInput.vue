@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="sr-only">{{ label }}</label>
+    <label class="text-gray-700">{{ label }}</label>
     <div class="mt-1 flex rounded-md shadow-sm">
        <span v-if="prepend"
              class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
@@ -15,15 +15,16 @@
                 :placeholder="label">
       </textarea>
       </template>
-<!--      <template v-if="type === 'select'">-->
-<!--        <select :name="name"-->
-<!--                :required="required"-->
-<!--                :value="props.modelValue"-->
-<!--                :class="inputClasses"-->
-<!--                @change="onChange($event.target.value)">-->
-<!--          <option v-for="option of selectOptions" :value="option.key">{{option.text}}</option>-->
-<!--        </select>-->
-<!--      </template>-->
+      <template v-if="type === 'select'">
+        <select :name="name"
+                :required="required"
+                :value="props.modelValue"
+                :class="inputClasses"
+                @change="emit('update:modelValue', $event.target.value)"
+        >
+          <option v-for="option of selectOptions" :value="option.key">{{option.text}}</option>
+        </select>
+      </template>
 <!--      <template v-else-if="type === 'textarea'">-->
 <!--      <textarea :name="name"-->
 <!--                :required="required"-->

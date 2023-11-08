@@ -67,3 +67,7 @@ export function setOrders(state, [loading, response = null]) {
         }
     }
 }
+
+export function setCountries(state, countries) {
+    state.countries = countries
+}

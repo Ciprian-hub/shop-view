@@ -35,6 +35,7 @@ export default {
         limit: null,
         total: null
     },
+    countries: [],
     customers: {
         loading: false,
         data: [],

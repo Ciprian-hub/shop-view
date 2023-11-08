@@ -101,6 +101,8 @@ const show = computed({
   set: (value) => emit('update:modelValue', value)
 })
 
+const countries = computed(() => store.state.countries.map(country => ({key : country.code, text : country.name})))
+
 const props = defineProps({
   modelValue: Boolean,
   customer: {

@@ -173,3 +173,11 @@ export function getCustomers({commit}, {url = null, search = '', perPage = 10, s
             commit('setCustomers', [false])
         })
 }
+
+export function getCountries ({commit}) {
+    return axiosClient.get('countries')
+        .then(({data}) => {
+            commit('setCountries', data)
+        })
+
+}
