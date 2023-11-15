@@ -1,7 +1,82 @@
-<script>
-import { defineComponent, h } from 'vue'
+<!--<script>-->
+<!--import { defineComponent, h } from 'vue'-->
 
-import { Doughnut } from 'vue-chartjs'
+<!--import { Doughnut } from 'vue-chartjs'-->
+<!--import {-->
+<!--  Chart as ChartJS,-->
+<!--  Title,-->
+<!--  Tooltip,-->
+<!--  Legend,-->
+<!--  ArcElement,-->
+<!--  CategoryScale-->
+<!--} from 'chart.js'-->
+
+<!--ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)-->
+
+<!--export default defineComponent({-->
+<!--  name: 'DoughnutChart',-->
+<!--  components: {-->
+<!--    Doughnut-->
+<!--  },-->
+props: {
+chartId: {
+type: String,
+default: 'doughnut-chart'
+},
+width: {
+type: Number,
+default: 400
+},
+height: {
+type: Number,
+default: 400
+},
+cssClasses: {
+default: '',
+type: String
+},
+styles: {
+type: Object,
+default: () => {}
+},
+plugins: {
+type: Array,
+default: () => []
+},
+data: {
+type: Object,
+required: true
+}
+},
+<!--  setup(props) {-->
+<!--    const chartOptions = {-->
+<!--      responsive: true,-->
+<!--      maintainAspectRatio: false-->
+<!--    }-->
+
+<!--    return () =>-->
+<!--        h(Doughnut,{-->
+<!--          chartData: props.data,-->
+<!--          chartOptions,-->
+<!--          chartId: props.chartId,-->
+<!--          width: props.width,-->
+<!--          height: props.height,-->
+<!--          cssClasses: props.cssClasses,-->
+<!--          styles: props.styles,-->
+<!--          plugins: props.plugins-->
+<!--        })-->
+<!--  }-->
+<!--})-->
+
+<!--</script>-->
+
+<!--<style scoped>-->
+
+<!--</style>-->
+<script>
+import {Doughnut} from 'vue-chartjs'
+import {ref, h} from 'vue'
+
 import {
   Chart as ChartJS,
   Title,
@@ -12,28 +87,19 @@ import {
 } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
-
-export default defineComponent({
-  name: 'Doughnut',
-  components: {
-    Doughnut
-  },
+export default {
   props: {
     chartId: {
       type: String,
-      default: 'doughnut'
-    },
-    labels: {
-      default: '',
-      type: String
+      default: 'doughnut-chart'
     },
     width: {
       type: Number,
-      default: 400
+      default: 100
     },
     height: {
       type: Number,
-      default: 400
+      default: 100
     },
     cssClasses: {
       default: '',
@@ -41,7 +107,8 @@ export default defineComponent({
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => {
+      }
     },
     plugins: {
       type: Array,
@@ -49,40 +116,22 @@ export default defineComponent({
     },
     data: {
       type: Object,
-      required: true
+      // required: true
     }
   },
   setup(props) {
-    const chartData = {
-      labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-      datasets: [
-        {
-          backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-          data: [40, 20, 80, 10]
-        }
-      ]
-    }
     const chartOptions = {
       responsive: true,
       maintainAspectRatio: false
     }
 
-    return () =>
-        h(Doughnut, {
-          chartData,
+    // return the render function
+    return () => h(Doughnut, {
+          data: props.data,
           chartOptions,
-          chartId: props.chartId,
-          width: props.width,
-          height: props.height,
-          cssClasses: props.cssClasses,
-          styles: props.styles,
-          plugins: props.plugins
-        })
+          width: props.width
+        },
+        [])
   }
-})
-
+}
 </script>
-
-<style scoped>
-
-</style>
