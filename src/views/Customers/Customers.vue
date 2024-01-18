@@ -30,7 +30,7 @@ function showAddNewModal(){
 }
 
 function editCustomer(customer) {
-  store.dispatch('geCustomer', customer.id)
+  store.dispatch('getCustomer', customer.id)
   .then(({data}) => {
     customerModel.value = data
     // this is for edit customer ...bad name

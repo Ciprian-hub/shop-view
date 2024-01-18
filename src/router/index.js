@@ -10,7 +10,7 @@ import Products from '../views/Products/Products.vue'
 import Orders from "../views/Orders/Orders.vue";
 import Users from "../views/Users/Users.vue";
 import Customers from "../views/Customers/Customers.vue";
-// import CustomerView from "../views/Customers/CustomerView.vue";
+import CustomerView from "../views/Customers/CustomerView.vue";
 
 const routes = [
     {
@@ -55,11 +55,11 @@ const routes = [
                 name: 'app.customers',
                 component: Customers
             },
-            // {
-            //     path: 'customers/:id',
-            //     name: 'app.customer.view',
-            //     component: CustomerView
-            // },
+            {
+                path: 'customers/:id',
+                name: 'app.customer.view',
+                component: CustomerView
+            },
         ]
     },
     {

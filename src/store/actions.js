@@ -101,7 +101,7 @@ export function getProduct({commit}, id) {
     return axiosClient.get(`/products/${id}`)
 }
 
-export function geCustomer({commit}, id) {
+export function getCustomer({commit}, id) {
     return axiosClient.get(`/customers/${id}`)
 }
 

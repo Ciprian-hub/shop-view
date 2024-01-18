@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="text-gray-700">{{ label }}</label>
-    <div class="mt-1 flex rounded-md shadow-sm">
+    <div class="mt-1 flex rounded-md" :class="type === 'checkbox' ? 'items-center' : 'shadow-sm'">
        <span v-if="prepend" class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
         {{ prepend }}
       </span>
@@ -19,20 +19,20 @@
                 :required="required"
                 :value="props.modelValue"
                 :class="inputClasses"
-                @change="emit('update:modelValue', $event.target.value)"
+                @change="onChange($event.target.value)"
         >
           <option v-for="option of selectOptions" :value="option.key">{{option.text}}</option>
         </select>
       </template>
-<!--      <template v-else-if="type === 'textarea'">-->
-<!--      <textarea :name="name"-->
-<!--                :required="required"-->
-<!--                :value="props.modelValue"-->
-<!--                @input="emit('update:modelValue', $event.target.value)"-->
-<!--                :class="inputClasses"-->
-<!--                :placeholder="label">-->
-<!--      </textarea>-->
-<!--      </template>-->
+      <template v-else-if="type === 'textarea'">
+      <textarea :name="name"
+                :required="required"
+                :value="props.modelValue"
+                @input="emit('update:modelValue', $event.target.value)"
+                :class="inputClasses"
+                :placeholder="label">
+      </textarea>
+      </template>
       <template v-else-if="type === 'file'">
         <input :type="type"
                :name="name"
@@ -41,6 +41,16 @@
                @input="emit('change', $event.target.files[0])"
                :class="inputClasses"
                :placeholder="label"/>
+      </template>
+      <template v-else-if="type === 'checkbox'">
+        <input :id="id"
+               :name="name"
+               :type="type"
+               :checked="props.modelValue"
+               :required="required"
+               @change="emit('update:modelValue', $event.target.checked)"
+               class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
+        <label :for="id" class="ml-2 block text-sm text-gray-900"> {{ label }} </label>
       </template>
       <template v-else>
         <input :type="type"
@@ -81,7 +91,15 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  selectOptions: Array
+  selectOptions: Array,
+  errors: {
+    type: Array,
+    required: false
+  },
+  editorConfig: {
+    type: Object,
+    default: () => ({})
+  }
 })
 
 // const id = computed(() => {
@@ -103,8 +121,16 @@ const inputClasses = computed(() => {
   } else if (!props.prepend && !props.append) {
     cls.push('rounded-md')
   }
+  if(props.errors && props.errors[0]){
+    cls.push('border-red-600 focus:border-red-600')
+  }
   return cls.join(' ')
 })
+
+function onChange(value) {
+  emit('update:modelValue', value)
+  emit('change', value)
+}
 
 const emit = defineEmits(['update:modelValue', 'change'])
 </script>

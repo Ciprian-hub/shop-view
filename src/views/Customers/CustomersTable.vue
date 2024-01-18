@@ -93,7 +93,7 @@
               <div class="px-1 py-1">
                 <MenuItem v-slot="{ active }">
                   <router-link
-                      :to="{name: 'app.customers.view', params: {id: customer.id}}"
+                      :to="{name: 'app.customer.view', params: {id: customer.id}}"
                       :class="[
                         active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
