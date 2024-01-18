@@ -9,7 +9,7 @@
 <!--    </button>-->
   </div>
   <CustomersTable @clickEdit="editCustomer"/>
-  <CustomersModal v-model="showModal" :customer="customerModel" @close="onModalClose"/>
+<!--  <CustomersModal v-model="showModal" :customer="customerModel" @close="onModalClose"/>-->
 </template>
 
 <script setup>
@@ -19,14 +19,10 @@ import CustomersTable from "./CustomersTable.vue";
 import CustomersModal from "./CustomersModal.vue";
 
 const EMPTY_OBJECT = {
-  // id: '',
-  // title: '',
-  // image: '',
-  // description: '',
-  // price: '',
 }
 const customers = computed(() => store.state.customers)
 const showModal = ref(false)
+
 const customerModel = ref({...EMPTY_OBJECT})
 
 function showAddNewModal(){

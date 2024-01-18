@@ -117,13 +117,17 @@ export function deleteProduct({commit}, id) {
     return axiosClient.delete(`/products/${id}`)
 }
 
-export function getOrders({commit}, {url = null, search = '', perPage = 10, sort_field, sort_direction} = {}) {
+export function getOrders({commit, state}, {url = null, search = '', perPage = 10, sort_field, sort_direction} = {}) {
     commit('setOrders', [true])
     url = url || '/orders';
+    const params = {
+        per_page: state.orders.limit
+    }
     return axiosClient.get(url, {
         params: {
+            ...params,
             search,
-            per_page: perPage,
+            perPage,
             sort_field,
             sort_direction
         }

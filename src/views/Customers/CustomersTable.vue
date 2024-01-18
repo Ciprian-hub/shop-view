@@ -92,12 +92,12 @@
             >
               <div class="px-1 py-1">
                 <MenuItem v-slot="{ active }">
-                  <button
+                  <router-link
+                      :to="{name: 'app.customers.view', params: {id: customer.id}}"
                       :class="[
                         active ? 'bg-indigo-600 text-white' : 'text-gray-900',
                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                       ]"
-                      @click="editCustomer(customer)"
                   >
                     <PencilIcon
                         :active="active"
@@ -105,7 +105,7 @@
                         aria-hidden="true"
                     />
                     Edit
-                  </button>
+                  </router-link>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <button
@@ -177,7 +177,7 @@ import TableHeaderCell from "../../components/core/Table/TableHeaderCell.vue";
 const perPage = ref(CUSTOMERS_PER_PAGE)
 const search = ref()
 const customers = computed(() => store.state.customers)
-const customer = ref({})
+// const customer = ref({})
 const emit = defineEmits(['clickEdit'])
 const sortField = ref('updated_at')
 const sortDirection = ref('desc')
