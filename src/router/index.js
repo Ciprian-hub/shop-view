@@ -11,6 +11,9 @@ import Orders from "../views/Orders/Orders.vue";
 import Users from "../views/Users/Users.vue";
 import Customers from "../views/Customers/Customers.vue";
 import CustomerView from "../views/Customers/CustomerView.vue";
+import CustomersReport from "../views/Reports/CustomersReport.vue";
+import OrdersReport from "../views/Reports/OrdersReport.vue";
+import Report from "../views/Reports/Report.vue";
 
 const routes = [
     {
@@ -20,6 +23,7 @@ const routes = [
     {
         path: '/app',
         name: 'app',
+        redirect: '/app/dashboard',
         component: AppLayout,
         meta: {
             requiresAuth: true
@@ -60,6 +64,26 @@ const routes = [
                 name: 'app.customer.view',
                 component: CustomerView
             },
+            {
+                path: '/report',
+                name: 'reports',
+                component: Report,
+                meta: {
+                    requiresAuth: true
+                },
+                children: [
+                    {
+                        path: 'orders',
+                        name: 'reports.orders',
+                        component: OrdersReport
+                    },
+                    {
+                        path: 'customers',
+                        name: 'reports.customers',
+                        component: CustomersReport
+                    },
+                ]
+            },
         ]
     },
     {
@@ -90,7 +114,7 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes,
 })
 
 router.beforeEach((to, from, next) => {
