@@ -95,10 +95,11 @@
 <script setup>
 import {UserIcon} from "@heroicons/vue/outline";
 import axiosClient from "../axios";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import DoughnutChart from "../components/Charts/Doughnut.vue";
 import {data} from "autoprefixer";
 import CustomInput from "../components/core/CustomInput.vue";
+import store from "../store/index.js";
 
 const customersCount = ref(0)
 const productsCount = ref(0)
@@ -113,15 +114,8 @@ const ordersByCountry = ref({
 })
 const latestCustomers = ref([])
 const latestOrders = ref('')
-const dateOptions = ref([
-  {key: "2d", text: "Last day"},
-  {key: "1wk", text: "Last Week"},
-  {key: "2wk", text: "Last 2 Weeks"},
-  {key: "1m", text: "Last Month"},
-  {key: "3m", text: "Last 3 Months"},
-  {key: "6m", text: "Last 6 Months"},
-  {key: "all", text: "All Time"}
-])
+const dateOptions = computed(() => store.state.dateOptions)
+
 
 function updateDashboard() {
   const date = chosenDate.value
@@ -175,6 +169,7 @@ function onDatePickerChange() {
 }
 
 onMounted(() =>updateDashboard())
+
 </script>
 
 <style>

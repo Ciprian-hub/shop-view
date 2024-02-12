@@ -45,5 +45,14 @@ export default {
         page: 1,
         limit: null,
         total: null
-    }
+    },
+    dateOptions: [
+        {key: "2d", text: "Last day"},
+        {key: "1wk", text: "Last Week"},
+        {key: "2wk", text: "Last 2 Weeks"},
+        {key: "1m", text: "Last Month"},
+        {key: "3m", text: "Last 3 Months"},
+        {key: "6m", text: "Last 6 Months"},
+        {key: "all", text: "All Time"}
+    ]
 }

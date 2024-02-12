@@ -1,16 +1,25 @@
 <template>
   <div>
     Orders Report
-    <BarChart :width="40" :data="dataForBoar.chartData" :options="dataForBoar.chartOptions"/>
+    <BarChart :width="40" :data="chartData" :options="dataForBoar.chartOptions"/>
   </div>
 </template>
 
 <script setup>
 import axiosClient from "../../axios.js";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import BarChart from "../../components/Charts/Bar.vue";
+import {useRoute} from "vue-router";
 
-const chartData = ref([])
+const route = useRoute()
+const chartData = ref({
+  labels:[],
+  datasets:[]
+})
+
+watch(route, (route) => {
+  getData(route.params.date)
+}, {immediate: true})
 
 const dataForBoar = {
   chartData: {
@@ -28,11 +37,13 @@ const dataForBoar = {
   }
 }
 
-axiosClient.get('reports/orders')
-    .then(({data}) => {
-      chartData.value = data
-      console.log(chartData.value)
-    })
+function getData() {
+  axiosClient.get('reports/orders', {params:{d: route.params.date}})
+      .then(({data}) => {
+        chartData.value = data
+      })
+}
+
 </script>
 
 <style lang="scss" scoped>
